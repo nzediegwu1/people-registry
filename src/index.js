@@ -21,7 +21,7 @@ app.use(cors());
 // Log requests to the console.
 app.use(volleyball);
 // Mongo Connection Set-Up
-const mongoDB = process.env.DATABASE_URL;
+const mongoDB = process.env.MONGODB_URI;
 mongoose.connect(mongoDB, { useFindAndModify: false, useNewUrlParser: true });
 mongoose.Promise = global.Promise;
 
