@@ -3,7 +3,6 @@ import { existsOr404, response } from '../helpers/controllerUtils';
 import { profiles } from '../messages/success';
 import { helmet } from '../helpers/errorHandler';
 
-// implement validation for params.ids and request body
 class UserProfile {
   get = async (req, res) => {
     const { params } = req;
