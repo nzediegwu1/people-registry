@@ -22,6 +22,13 @@ class UserContact {
   };
   update = async (req, res) => {
     const { body, params } = req;
+    const contact = await Contact.findOne({
+      _id: { $ne: params.id },
+      $or: [{ email: body.email }, { phone: body.phone }],
+    });
+    if (contact) {
+      return response(res, 409, 'Email or phone number already exists');
+    }
     const data = await Contact.findByIdAndUpdate(params.id, body, { new: true });
     return existsOr404(res, data, 'Contact');
   };
