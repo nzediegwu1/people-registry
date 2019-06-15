@@ -1,9 +1,9 @@
-# People-Registry
+# Contacts-Api
 
 ## Installation
 1. Clone this repository into your local machine:
 ```
-git clone https://github.com/nzediegwu1/people-registry.git
+git clone https://github.com/nzediegwu1/contacts-api.git
 ```
 2. Install dependencies
 ```

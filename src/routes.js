@@ -1,14 +1,14 @@
 import express from 'express';
-import profile from './controllers/profile';
+import contact from './controllers/contact';
 import { validateUser, validateId, handleValidation } from './middlewares/validator';
 
 const app = express.Router();
 
-app.get('/', (req, res) => res.status(200).send('Welcome People-Registry api'));
-app.get('/people/:id', validateId, handleValidation, profile.get);
-app.get('/people', profile.getAll);
-app.post('/people', validateUser, handleValidation, profile.create);
-app.patch('/people/:id', validateUser, handleValidation, profile.update);
-app.delete('/people/:id', validateId, handleValidation, profile.delete);
+app.get('/', (req, res) => res.status(200).send('Welcome Contact-Registry api'));
+app.get('/contacts/:id', validateId, handleValidation, contact.get);
+app.get('/contacts', contact.getAll);
+app.post('/contacts', validateUser, handleValidation, contact.create);
+app.patch('/contacts/:id', validateUser, handleValidation, contact.update);
+app.delete('/contacts/:id', validateId, handleValidation, contact.delete);
 
 export default app;

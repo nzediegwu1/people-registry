@@ -16,6 +16,13 @@ export const handleValidation = async (req, res, next) => {
   return Array.isArray(result) ? res.status(400).json({ errors: result, status: 'error' }) : result;
 };
 
+const validateLength = (min, max) => (field) => {
+  if (!field.length) {
+    return true;
+  }
+  return field.length >= min && field.length <= max;
+};
+
 export const validateUser = [
   check('id')
     .trim()
@@ -51,28 +58,28 @@ export const validateUser = [
     .optional()
     .withMessage('Facebook should be a string')
     .trim()
-    .isLength({ min: 4, max: 40 })
-    .withMessage('Facebook ID should be at least 4 characters and not more than 40'),
+    .custom(validateLength(6, 40))
+    .withMessage('Facebook ID should be at least 6 characters and not more than 40'),
   check('twitter')
     .isString()
     .optional()
     .withMessage('Twitter should be a string')
     .trim()
-    .isLength({ min: 4, max: 40 })
+    .custom(validateLength(6, 40))
     .withMessage('Twitter ID should be at least 6 characters and not more than 40'),
   check('linkedIn')
     .isString()
     .optional()
     .withMessage('Twitter should be a string')
     .trim()
-    .isLength({ min: 4, max: 40 })
-    .withMessage('LinkedIn should be at least 4 characters and not more than 40'),
+    .custom(validateLength(6, 40))
+    .withMessage('LinkedIn should be at least 6 characters and not more than 40'),
   check('occupation')
     .isString()
     .optional()
     .withMessage('Occupation should be string')
     .trim()
-    .isLength({ min: 5, max: 70 })
+    .custom(validateLength(5, 70))
     .withMessage('Occupation should be at least 5 characters and not more than 70'),
   check('gender')
     .isString()

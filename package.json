@@ -1,15 +1,15 @@
 {
-  "name": "people-registry",
+  "name": "contacts-api",
   "version": "1.0.0",
-  "description": "An open api for storing and managing records of people in a community",
+  "description": "An opensource web app for storing and managing your contacts",
   "main": "src/index.js",
-  "repository": "https://github.com/nzediegwu1/people-registry.git",
+  "repository": "https://github.com/nzediegwu1/contacts-api.git",
   "author": "anaeze <nzediegwu1@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/nzediegwu1/people-registry/issues"
+    "url": "https://github.com/nzediegwu1/contacts-api/issues"
   },
-  "homepage": "https://github.com/nzediegwu1/people-registry#readme",
+  "homepage": "https://github.com/nzediegwu1/contacts-api#readme",
   "scripts": {
     "start": "node src/dist/index.js",
     "dev": "babel-watch src/index.js",

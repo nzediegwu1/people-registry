@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const requiredString = { type: String, required: true };
 
-const Profile = new mongoose.Schema(
+const Contact = new mongoose.Schema(
   {
     email: { ...requiredString, unique: true },
     fullname: requiredString,
@@ -19,4 +19,4 @@ const Profile = new mongoose.Schema(
   },
 );
 
-export default mongoose.model('profile', Profile);
+export default mongoose.model('contact', Contact);

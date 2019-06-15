@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-export const profiles = {
-  fetched: 'Successfully fetched user profiles',
-  created: 'Successfully created your profile',
+export const contacts = {
+  fetched: 'Successfully fetched user contacts',
+  created: 'Successfully created your contact',
 };
