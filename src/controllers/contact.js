@@ -16,7 +16,7 @@ class UserContact {
   create = async (req, res) => {
     const { body } = req;
     const contact = await Contact.findOne({ $or: [{ email: body.email }, { phone: body.phone }] });
-    if (contact) return response(res, 409, 'Contact email or phone already exists');
+    if (contact) return response(res, 409, 'Email or phone number already exists');
     const data = await Contact.create(body);
     return response(res, 200, contacts.created, data);
   };

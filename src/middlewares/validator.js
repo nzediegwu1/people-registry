@@ -1,5 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import { check, validationResult } from 'express-validator/check';
+import { isURL } from 'validator';
 
 const getErrors = (req, next) => {
   const errors = validationResult(req)
@@ -21,6 +22,16 @@ const validateLength = (min, max) => (field) => {
     return true;
   }
   return field.length >= min && field.length <= max;
+};
+
+const validateUrl = key => (field) => {
+  if (!field.length) {
+    return true;
+  }
+  return (
+    isURL(field, { protocols: ['https'], require_protocol: true }) &&
+    field.toLowerCase().includes(`${key}.com`)
+  );
 };
 
 export const validateUser = [
@@ -58,20 +69,26 @@ export const validateUser = [
     .optional()
     .withMessage('Facebook should be a string')
     .trim()
+    .custom(validateUrl('facebook'))
+    .withMessage('Facebook link is not valid + requires https://')
     .custom(validateLength(6, 40))
     .withMessage('Facebook ID should be at least 6 characters and not more than 40'),
   check('twitter')
     .isString()
     .optional()
-    .withMessage('Twitter should be a string')
+    .withMessage('Twitter url should be a string')
     .trim()
+    .custom(validateUrl('twitter'))
+    .withMessage('Twitter link is not valid + requires https://')
     .custom(validateLength(6, 40))
     .withMessage('Twitter ID should be at least 6 characters and not more than 40'),
   check('linkedIn')
     .isString()
     .optional()
-    .withMessage('Twitter should be a string')
+    .withMessage('LinkedIn url should be a string')
     .trim()
+    .custom(validateUrl('linkedin'))
+    .withMessage('LinkedIn url is not valid + requires https://')
     .custom(validateLength(6, 40))
     .withMessage('LinkedIn should be at least 6 characters and not more than 40'),
   check('occupation')
