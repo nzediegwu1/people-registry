@@ -30,8 +30,8 @@
     "eslint": "^4.18.1",
     "express": "^4.16.2",
     "express-validator": "^5.3.1",
-    "hubot-heroku-keepalive": "^1.0.3",
     "mongoose": "^5.4.22",
+    "ms": "^2.1.2",
     "validator": "^11.0.0",
     "volleyball": "^1.4.1"
   },
