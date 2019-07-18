@@ -1,7 +1,5 @@
 /* eslint-disable no-console */
 import express from 'express';
-import http from 'http';
-import ms from 'ms';
 import volleyball from 'volleyball';
 import bodyParser from 'body-parser';
 import '@babel/polyfill';
@@ -11,7 +9,7 @@ import mongoose from 'mongoose';
 import routes from './routes';
 
 dotenv.config();
-const { PORT, BASE_URL, PING_INTERVAL } = process.env;
+const { PORT } = process.env;
 
 // Defining the Port Variable
 const port = PORT || 8000;
@@ -47,7 +45,6 @@ app.get('*', (req, res) =>
 
 app.listen(port, () => {
   console.log(`Server is running at port ${port}`);
-  setInterval(() => http.get(BASE_URL), ms(PING_INTERVAL));
 });
 
 export default app;

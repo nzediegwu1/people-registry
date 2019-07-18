@@ -71,7 +71,7 @@ export const validateUser = [
     .trim()
     .custom(validateUrl('facebook'))
     .withMessage('Facebook link is not valid + requires https://')
-    .custom(validateLength(6, 40))
+    .custom(validateLength(6, 80))
     .withMessage('Facebook ID should be at least 6 characters and not more than 40'),
   check('twitter')
     .isString()
@@ -80,7 +80,7 @@ export const validateUser = [
     .trim()
     .custom(validateUrl('twitter'))
     .withMessage('Twitter link is not valid + requires https://')
-    .custom(validateLength(6, 40))
+    .custom(validateLength(6, 80))
     .withMessage('Twitter ID should be at least 6 characters and not more than 40'),
   check('linkedIn')
     .isString()
@@ -89,7 +89,7 @@ export const validateUser = [
     .trim()
     .custom(validateUrl('linkedin'))
     .withMessage('LinkedIn url is not valid + requires https://')
-    .custom(validateLength(6, 40))
+    .custom(validateLength(6, 80))
     .withMessage('LinkedIn should be at least 6 characters and not more than 40'),
   check('occupation')
     .isString()

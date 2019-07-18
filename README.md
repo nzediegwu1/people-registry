@@ -19,4 +19,4 @@ yarn test
 ```
 
 ### API Docs
-API collection can be run in postman: ..loading
+API Documentation with postman: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/7651a3da476f29b3a4b0)
