@@ -1,50 +1,55 @@
 import Contact from '../models/contact';
-import { existsOr404, response } from '../helpers/controllerUtils';
+import { existsOr404, response, resolver } from '../helpers/http';
 import { contacts } from '../messages/success';
-import { helmet } from '../helpers/errorHandler';
+import { user } from '../messages/error';
 
-class UserContact {
-  get = async (req, res) => {
+const UserContact = {
+  async get(req, res) {
     const { params } = req;
     const data = await Contact.findOne({ _id: params.id });
     return existsOr404(res, data, 'Contact');
-  };
-  getAll = async (req, res) => {
+  },
+  async getAll(req, res) {
     const data = await Contact.find({}).sort('-updatedAt');
-    return response(res, 200, contacts.fetched, data);
-  };
-  create = async (req, res) => {
+    return response({ res, message: contacts.fetched, data });
+  },
+  async create(req, res) {
     const { body } = req;
-    const contact = await Contact.findOne({ $or: [{ email: body.email }, { phone: body.phone }] });
-    if (contact) return response(res, 409, 'Email or phone number already exists');
+    const contact = await Contact.findOne({
+      $or: [{ email: body.email }, { phone: body.phone }],
+    });
+    if (contact) {
+      const message = user.alreadyExists;
+      return response({ res, code: 409, message });
+    }
     const data = await Contact.create(body);
-    return response(res, 200, contacts.created, data);
-  };
-  update = async (req, res) => {
+    return response({ res, message: contacts.created, data });
+  },
+  async update(req, res) {
     const { body, params } = req;
     const contact = await Contact.findOne({
       _id: { $ne: params.id },
       $or: [{ email: body.email }, { phone: body.phone }],
     });
     if (contact) {
-      return response(res, 409, 'Email or phone number already exists');
+      const message = user.alreadyExists;
+      return response({ res, code: 409, message });
     }
-    const data = await Contact.findByIdAndUpdate(params.id, body, { new: true });
-    return existsOr404(res, data, 'Contact');
-  };
+    const data = await Contact.findByIdAndUpdate(params.id, body, {
+      new: true,
+    });
+    existsOr404(res, data, 'Contact');
+    const message = contacts.updated;
+    return response({ res, message, data });
+  },
 
-  delete = async (req, res) => {
+  async delete(req, res) {
     const { params } = req;
     const data = await Contact.findByIdAndDelete(params.id);
-    return existsOr404(res, data, 'Contact');
-  };
-}
-const contact = new UserContact();
-
-export default {
-  get: helmet(contact.get),
-  getAll: helmet(contact.getAll),
-  create: helmet(contact.create),
-  update: helmet(contact.update),
-  delete: helmet(contact.delete),
+    existsOr404(data, 'Contact');
+    const message = contacts.deleted;
+    return response({ res, message });
+  },
 };
+
+export default resolver(UserContact);
