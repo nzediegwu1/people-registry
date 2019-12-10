@@ -7,7 +7,8 @@ const UserContact = {
   async get(req, res) {
     const { params } = req;
     const data = await Contact.findOne({ _id: params.id });
-    return existsOr404(res, data, 'Contact');
+    existsOr404(res, data, 'Contact');
+    return response({ res, message: contacts.retrieved, data });
   },
   async getAll(req, res) {
     const data = await Contact.find({}).sort('-updatedAt');

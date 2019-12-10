@@ -4,4 +4,5 @@ export const contacts = {
   created: 'Successfully created your contact',
   updated: 'Successfully updated contact',
   deleted: 'Successfully deleted contact',
+  retrieved: 'Successfully retrieved contact',
 };
