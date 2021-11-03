@@ -32,7 +32,7 @@
     "express-validator": "^5.3.1",
     "mongoose": "^5.4.22",
     "ms": "^2.1.2",
-    "validator": "^11.0.0",
+    "validator": "^13.7.0",
     "volleyball": "^1.4.1"
   },
   "devDependencies": {
