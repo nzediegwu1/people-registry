@@ -19,6 +19,6 @@ yarn test
 ```
 
 ### API Docs
-API Documentation with postman
+API Documentation on Postman
 - Local machine: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/7651a3da476f29b3a4b0)
 - Online: [online docs](https://documenter.getpostman.com/view/4912237/SVSLr9AF?version=latest)
